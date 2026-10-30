@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- Разработчик: Fill -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fill — создание сайтов, программ и интерфейсов</title>
+<meta name="description" content="Привет, я Fill. Создаю сайты, программы, интерфейсы и ботов. Здесь мои проекты, инструменты и путь в современной разработке.">
+<meta name="author" content="Fill">
+<meta name="theme-color" content="#08080d">
+<link rel="canonical" href="https://example.ru/">
+
+<!-- Иконка (искра) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%238b5cf6'/%3E%3Cpath d='M16 6L18 14L26 16L18 18L16 26L14 18L6 16L14 14L16 6Z' fill='%23ffffff'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Fill">
+<meta property="og:title" content="Fill — создание сайтов, программ и интерфейсов">
+<meta property="og:description" content="Создаю цифровые продукты: от сайтов и ботов до полноценных программ. Портфолио, инструменты, современный подход к разработке.">
+<meta property="og:url" content="https://example.ru/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fill",
+  "alternateName": "f1ll",
+  "description": "Разработчик. Создаю сайты, программы, Telegram-ботов и интерфейсы.",
+  "url": "https://example.ru/",
+  "sameAs": [
+    "https://t.me/f1llkisazaykin",
+    "https://t.me/vibecodingbyf1ll",
+    "https://vk.ru/lovessc3zy"
+  ]
+}
+</script>
+
+<style>
+/* ---------- Reset & Tokens ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08080d;
+  --bg-soft:#0d0d13;
+  --surface:rgba(255,255,255,0.04);
+  --surface-hover:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.09);
+  --border-soft:rgba(255,255,255,0.05);
+  --text:#f5f5f7;
+  --text-muted:#a1a1aa;
+  --text-dim:#71717a;
+  --accent:#8b5cf6;
+  --accent-hover:#a78bfa;
+  --accent-glow:rgba(139,92,246,0.3);
+  --cyan:#22d3ee;
+  --pink:#ec4899;
+  --blue:#3b82f6;
+  --radius-sm:14px;
+  --radius:22px;
+  --radius-lg:32px;
+  --shadow:0 8px 32px rgba(0,0,0,0.45);
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  --transition:all .3s cubic-bezier(.4,0,.2,1);
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+}
+html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font);font-size:16px;line-height:1.65;color:var(--text);
+  background:var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;position:relative;
+}
+body.menu-locked, body.modal-locked{overflow:hidden}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4{line-height:1.15;font-weight:700;letter-spacing:-.025em;color:var(--text)}
+h1{font-size:clamp(40px,6.5vw,72px);letter-spacing:-.045em;margin-bottom:28px}
+h2{font-size:clamp(30px,4.2vw,48px);letter-spacing:-.035em;margin-bottom:20px}
+h3{font-size:clamp(20px,2vw,24px);letter-spacing:-.02em;margin-bottom:12px}
+p{margin:0;color:var(--text-muted);font-size:16px;line-height:1.65}
+ul{margin:0;padding:0;list-style:none}
+a{color:var(--text);text-decoration:none;transition:var(--transition)}
+a:hover{color:var(--accent-hover)}
+[hidden]{display:none !important}
+button{background:none;border:none;font-family:inherit;color:inherit;cursor:pointer;transition:var(--transition)}
+
+/* ---------- Aurora Background ---------- */
+.aurora-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;background:var(--bg);}
+.aurora-blob{
+  position:absolute;border-radius:50%;filter:blur(130px);opacity:0.45;will-change:transform;
+  transform:translateZ(0);
+}
+.blob-1{width:600px;height:600px;top:-15%;left:-10%;background:radial-gradient(circle, var(--accent) 0%, transparent 70%);animation:drift1 24s ease-in-out infinite alternate;}
+.blob-2{width:700px;height:700px;top:20%;right:-15%;background:radial-gradient(circle, var(--cyan) 0%, transparent 70%);animation:drift2 28s ease-in-out infinite alternate;}
+.blob-3{width:500px;height:500px;bottom:-10%;left:30%;background:radial-gradient(circle, var(--pink) 0%, transparent 70%);opacity:0.25;animation:drift3 32s ease-in-out infinite alternate;}
+.blob-4{width:450px;height:450px;top:50%;left:-5%;background:radial-gradient(circle, #6366f1 0%, transparent 70%);opacity:0.2;animation:drift4 26s ease-in-out infinite alternate;}
+@keyframes drift1{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(80px,60px,0) scale(1.15)}}
+@keyframes drift2{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-100px,40px,0) scale(1.1)}}
+@keyframes drift3{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(60px,-80px,0) scale(1.2)}}
+@keyframes drift4{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(50px,100px,0) scale(0.9)}}
+
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:0.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Layout ---------- */
+.container{width:100%;max-width:1180px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.section{padding:80px 0;position:relative}
+.section--soft{background:linear-gradient(180deg,transparent 0%,rgba(255,255,255,0.015) 15%,rgba(255,255,255,0.015) 85%,transparent 100%);}
+.section-divider {height: 1px;width: 100%;background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3) 50%, transparent);position: relative;margin: 0 auto;max-width: 600px;opacity: 0.7;}
+.section-divider::after {content: "";position: absolute;top: -1px; left: 50%; transform: translateX(-50%);width: 4px; height: 4px; border-radius: 50%;background: var(--accent);box-shadow: 0 0 12px var(--accent);}
+.section-head{max-width:780px;margin-bottom:44px}
+.section-head p{font-size:18px;line-height:1.65}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--text-muted);margin-bottom:24px;backdrop-filter:blur(8px);}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulseDot 2.5s ease-in-out infinite;}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 8px var(--accent);opacity:1}50%{box-shadow:0 0 20px var(--accent),0 0 40px var(--accent-glow);opacity:0.7}}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:120;background:var(--accent);color:#fff;padding:14px 24px;border-radius:0 0 14px 0;text-decoration:none;font-weight:600;}
+.skip-link:focus{left:0;color:#fff}
+
+/* ---------- Buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 28px;border-radius:var(--radius-sm);border:1px solid transparent;font-size:15px;font-weight:600;line-height:1.2;letter-spacing:-.01em;text-decoration:none;cursor:pointer;transition:transform .25s var(--ease-out), box-shadow .25s var(--ease-out), background-color .25s ease, border-color .25s ease, color .25s ease;white-space:nowrap;overflow:hidden;}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.18) 50%,transparent 70%);transform:translateX(-100%);transition:transform .6s var(--ease-out);pointer-events:none;}
+.btn:hover::before{transform:translateX(100%)}
+.btn-primary{background:rgba(255,255,255,0.06);color:var(--text);border-color:rgba(255,255,255,0.12);backdrop-filter:blur(8px);}
+.btn-primary:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.25);transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(0,0,0,0.5);}
+.btn-accent{background:linear-gradient(135deg,var(--accent) 0%,#6d28d9 100%);background-size:200% 200%;background-position:0% 50%;color:#fff;border-color:rgba(255,255,255,0.15);box-shadow:0 4px 20px -4px var(--accent-glow);}
+.btn-accent:hover{background-position:100% 50%;transform:translateY(-2px);box-shadow:0 8px 40px -4px rgba(139,92,246,0.5),0 0 60px -10px var(--accent-glow);color:#fff;}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--border);}
+.btn-ghost:hover{background:rgba(255,255,255,0.04);border-color:var(--accent);color:var(--accent-hover);transform:translateY(-2px);box-shadow:0 8px 24px -12px rgba(139,92,246,0.3);}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:0;z-index:60;background:rgba(8,8,13,0.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-soft);transition:background .3s ease, box-shadow .3s ease;}
+.site-header.scrolled{background:rgba(8,8,13,0.9);box-shadow:0 4px 30px rgba(0,0,0,0.3);}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:78px;}
+
+.logo{display:inline-flex;align-items:center;gap:12px;font-weight:800;font-size:22px;letter-spacing:-.03em;position:relative;}
+.logo-mark{color:var(--accent);filter:drop-shadow(0 0 10px var(--accent-glow))}
+.logo span{color:var(--text);display:flex;align-items:baseline;}
+.logo b{color:var(--text);font-weight:800;}
+
+.burger{display:inline-flex;flex-direction:column;justify-content:center;gap:6px;width:46px;height:46px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:12px;backdrop-filter:blur(8px);}
+.burger:hover{background:var(--surface-hover);border-color:var(--accent)}
+.burger span{display:block;height:2px;border-radius:2px;background:var(--text);transition:transform .3s var(--ease-out),opacity .3s ease}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.site-nav{position:absolute;left:0;right:0;top:100%;display:none;background:rgba(13,13,19,0.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:16px 24px 24px;box-shadow:0 24px 48px rgba(0,0,0,0.5);}
+.site-nav.is-open{display:block;animation:navSlide .3s var(--ease-out)}
+@keyframes navSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.site-nav ul{display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
+.site-nav .nav-link{display:block;padding:13px 16px;border-radius:var(--radius-sm);font-weight:500;color:var(--text-muted);transition:background .2s ease,color .2s ease;}
+.site-nav .nav-link:hover{background:var(--surface);color:var(--text)}
+.nav-phone{width:100%}
+
+/* ---------- Hero ---------- */
+.hero{padding:48px 0 80px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--text-muted);margin-bottom:32px;backdrop-filter:blur(8px);}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px var(--cyan);animation:pulseCyan 2.2s ease-in-out infinite;}
+@keyframes pulseCyan{0%,100%{box-shadow:0 0 8px var(--cyan);opacity:1}50%{box-shadow:0 0 24px var(--cyan),0 0 40px rgba(34,211,238,0.4);opacity:0.8}}
+.hero h1{margin-bottom:28px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent) 0%,var(--cyan) 50%,var(--accent-hover) 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:gradientText 6s ease-in-out infinite;}
+@keyframes gradientText{0%,100%{background-position:0% center}50%{background-position:100% center}}
+.hero .lead{font-size:18px;margin-bottom:40px;max-width:540px;line-height:1.65}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.hero-link{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);border:1px solid var(--border);font-size:14px;font-weight:500;color:var(--text-muted);margin-bottom:48px;backdrop-filter:blur(8px);transition:var(--transition);}
+.hero-link:hover{background:var(--surface-hover);color:var(--text);border-color:var(--accent);transform:translateX(4px);}
+.trust-list{display:flex;flex-direction:column;gap:24px}
+.trust-item{display:flex;gap:16px;align-items:flex-start;transition:transform .25s ease}
+.trust-item:hover{transform:translateX(4px)}
+.trust-icon{flex:0 0 auto;width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--accent);transition:background .2s ease,border-color .2s ease;}
+.trust-item:hover .trust-icon{background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.3)}
+.trust-content strong{display:block;font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.trust-content span{font-size:14px;color:var(--text-muted);line-height:1.5}
+
+.hero-visual{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,0.02);min-height:520px;display:flex;flex-direction:column;justify-content:flex-end;backdrop-filter:blur(12px);box-shadow:0 24px 80px -24px rgba(0,0,0,0.6);transition:transform .4s var(--ease-out),box-shadow .4s ease;}
+.hero-visual:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 32px 100px -24px rgba(139,92,246,0.2);}
+.hero-svg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.85}
+.hero-visual-overlay{position:relative;z-index:2;padding:32px 28px;background:linear-gradient(to top,rgba(8,8,13,0.98) 0%,rgba(8,8,13,0.7) 50%,transparent 100%);}
+.floating-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.f-tag{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,0.08);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);font-size:13px;font-weight:500;color:#fff;transition:transform .25s ease,background .25s ease;}
+.f-tag:hover{transform:translateY(-2px);background:rgba(255,255,255,0.12)}
+.f-tag svg{width:14px;height:14px;color:var(--accent)}
+.visual-text{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm);padding:18px;backdrop-filter:blur(12px);font-size:13.5px;color:var(--text-muted);line-height:1.55;}
+.visual-text b{color:var(--text)}
+
+/* ---------- Glass Card ---------- */
+.glass-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:transform .35s var(--ease-out),box-shadow .35s ease,border-color .3s ease,background .3s ease;position:relative;overflow:hidden;}
+.glass-card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,transparent 50%);pointer-events:none;opacity:0;transition:opacity .3s ease;}
+.glass-card:hover::before{opacity:1}
+.glass-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.16);box-shadow:0 20px 48px -16px rgba(0,0,0,0.5),0 0 40px -12px var(--accent-glow);background:var(--surface-hover);}
+
+/* ---------- How it works ---------- */
+.def-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.def-card{padding:32px}
+.def-card .big-num{font-size:clamp(36px,4vw,52px);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1;margin-bottom:18px;display:inline-block;}
+.def-card h3{font-size:18px;margin-bottom:10px}
+.def-card p{font-size:14.5px;color:var(--text-muted);margin:0}
+
+/* ---------- Portfolio ---------- */
+.portfolio-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.project-card{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.project-visual{height:180px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);background:#121218;display:flex;align-items:center;justify-content:center;}
+.project-body{padding:24px;display:flex;flex-direction:column;flex:1}
+.project-body h3{font-size:18px;margin-bottom:8px}
+.project-body p{font-size:14px;color:var(--text-muted);margin-bottom:16px;flex:1}
+.project-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid var(--border);font-size:11px;font-weight:500;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em;}
+.pill--accent{color:var(--accent-hover);border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.08)}
+.project-footer {margin-top: auto;padding-top: 16px;border-top: 1px solid var(--border-soft);display: flex;align-items: center;justify-content: space-between;}
+.project-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--cyan);}
+.project-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+.project-link {display: inline-flex;align-items: center;gap: 6px;font-size: 13px;font-weight: 600;color: var(--text);transition: color .2s ease, transform .2s ease;background: none;border: none;cursor: pointer;padding: 0;}
+.project-link:hover {color: var(--accent-hover);transform: translateX(2px);}
+.project-link svg {width: 14px;height: 14px;}
+
+/* Красивые обложки */
+.preview-mac { width: 70%; height: 65%; background: #18181b; border-radius: 8px; border: 1px solid #27272a; box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; position: relative; }
+.preview-mac-header { height: 20px; background: #27272a; display: flex; align-items: center; padding: 0 8px; gap: 4px; }
+.preview-mac-dot { width: 6px; height: 6px; border-radius: 50%; background: #3f3f46; }
+.preview-mac-dot:nth-child(1){background:#ef4444} .preview-mac-dot:nth-child(2){background:#fbbf24} .preview-mac-dot:nth-child(3){background:#22c55e}
+.preview-mac-body { flex: 1; background: radial-gradient(circle at 50% 50%, rgba(139,92,246,0.2) 0%, transparent 70%); position: relative; }
+.preview-mac-body::after { content: ""; position: absolute; top: 20px; left: 20px; right: 20px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1); box-shadow: 0 12px 0 rgba(255,255,255,0.05), 0 24px 0 rgba(255,255,255,0.05); }
+
+.preview-chat { width: 75%; display: flex; flex-direction: column; gap: 6px; }
+.preview-chat-bubble { height: 24px; border-radius: 8px; width: 60%; background: #182533; position: relative; }
+.preview-chat-bubble.user { align-self: flex-end; background: #2b5278; width: 40%; }
+.preview-chat-bubble::after { content: ""; position: absolute; top: 10px; left: 10px; width: 40%; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.2); }
+
+.preview-coffee { width: 100%; height: 100%; background: #fcf9f2; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.preview-coffee-title { font-family: "Georgia", serif; font-size: 18px; color: #4a3b32; margin-bottom: 8px; }
+.preview-coffee-line { width: 40px; height: 2px; background: #d1c7b8; }
+
+/* ---------- Tools Grid ---------- */
+.tools-grid {display: flex;flex-wrap: wrap;gap: 12px;}
+.tool-tag{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);background:var(--surface);border:1px solid var(--border);font-size:15px;font-weight:500;color:var(--text-muted);transition:var(--transition);}
+.tool-tag:hover{background:var(--surface-hover);border-color:var(--accent);color:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px -12px var(--accent-glow);}
+.tool-tag svg{width:18px;height:18px;color:var(--accent)}
+
+/* ---------- Process ---------- */
+.steps-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.step-card{padding:32px;position:relative}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2);color:var(--accent);font-weight:700;font-size:16px;margin-bottom:20px;transition:background .25s ease,box-shadow .25s ease;}
+.step-card:hover .step-num{background:rgba(139,92,246,0.25);box-shadow:0 0 20px var(--accent-glow)}
+.step-card h3{font-size:17px;margin-bottom:10px}
+.step-card p{font-size:14.5px;color:var(--text-muted);margin:0;line-height:1.55}
+
+/* ---------- Channel CTA ---------- */
+.channel-box{background:linear-gradient(135deg,rgba(139,92,246,0.12) 0%,rgba(34,211,238,0.06) 100%);border:1px solid rgba(139,92,246,0.2);border-radius:var(--radius-lg);padding:56px 32px;text-align:center;position:relative;overflow:hidden;backdrop-filter:blur(16px);}
+.channel-box::before{content:"";position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:700px;height:350px;background:var(--accent);filter:blur(140px);opacity:0.15;pointer-events:none;animation:ctaPulse 8s ease-in-out infinite;}
+@keyframes ctaPulse{0%,100%{opacity:0.12;transform:translateX(-50%) scale(1)}50%{opacity:0.2;transform:translateX(-50%) scale(1.1)}}
+.channel-box > *{position:relative;z-index:1}
+.channel-box h2{margin-bottom:16px}
+.channel-box p{max-width:640px;margin:0 auto 32px;font-size:17px;color:var(--text-muted);line-height:1.65}
+.channel-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:920px}
+.faq-item{
+  background:rgba(255,255,255,0.02);
+  border:1px solid var(--border-soft);
+  border-radius:var(--radius-sm);
+  margin-bottom:16px;
+  transition:all 0.3s ease;
+  overflow:hidden;
+}
+.faq-item:hover{
+  background:rgba(255,255,255,0.04);
+  border-color:rgba(255,255,255,0.15);
+}
+.faq-item.is-open{
+  background:var(--surface);
+  border-color:rgba(139,92,246,0.4);
+  box-shadow:0 8px 24px -12px rgba(139,92,246,0.15);
+}
+.faq-h{margin:0}
+.faq-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;
+  padding:24px 28px;
+  font-size:16px;font-weight:600;text-align:left;color:var(--text);
+  transition:color .2s ease;
+}
+.faq-q:hover{color:var(--accent-hover)}
+.faq-q:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;border-radius:var(--radius-sm)}
+.faq-chev{
+  flex:0 0 auto;width:32px;height:32px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text-muted);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .35s var(--ease-out),background .25s ease,color .25s ease,border-color .25s ease;
+}
+.faq-q[aria-expanded="true"] .faq-chev{
+  transform:rotate(180deg);
+  background:var(--accent);color:#fff;border-color:var(--accent);
+  box-shadow:0 0 16px var(--accent-glow);
+}
+.faq-a{
+  padding:0 28px 24px;
+  color:var(--text-muted);
+  font-size:15px;
+  line-height:1.65;
+}
+.faq-a p{margin:0}
+
+/* ---------- Contacts ---------- */
+.contacts-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.contact-card{display:flex;gap:16px;align-items:center;padding:24px;text-decoration:none;}
+.contact-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.c-icon{flex:0 0 auto;width:52px;height:52px;border-radius:16px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;color:var(--accent);transition:background .25s ease,transform .25s ease;}
+.contact-card:hover .c-icon{background:rgba(139,92,246,0.18);transform:scale(1.05)}
+.c-text small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);font-weight:600;margin-bottom:4px}
+.c-text strong{font-size:16px;color:var(--text);font-weight:600}
+
+/* ---------- Footer ---------- */
+.site-footer{background:rgba(0,0,0,0.3);border-top:1px solid var(--border);padding:56px 0 32px;font-size:14px;backdrop-filter:blur(8px);}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:40px}
+.f-col h3{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:20px}
+.f-col ul{display:flex;flex-direction:column;gap:12px}
+.f-col a,.f-link{color:var(--text-muted);text-decoration:none;background:none;border:none;padding:0;font-family:inherit;font-size:14px;text-align:left;cursor:pointer;transition:color .15s ease;}
+.f-col a:hover,.f-link:hover{color:var(--accent-hover)}
+.f-col a:focus-visible,.f-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.requisites{font-size:13px;color:var(--text-dim);line-height:1.7;margin:0}
+.footer-bottom{margin-top:40px;padding-top:24px;border-top:1px solid var(--border-soft);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:13px;color:var(--text-dim);}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.reveal.visible{opacity:1;transform:none}
+
+/* ---------- MODALS ---------- */
+.modal {position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;}
+.modal.active { opacity: 1; pointer-events: auto; }
+.modal-overlay {position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);}
+.modal-content {position: relative; z-index: 1; background: #121218; border: 1px solid var(--border); border-radius: var(--radius); width: 100%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 32px 80px rgba(0,0,0,0.8); transform: translateY(20px) scale(0.95); transition: transform 0.3s var(--ease-out); overflow: hidden;}
+.modal.active .modal-content { transform: translateY(0) scale(1); }
+.modal-header {display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); background: #121218; z-index: 10;}
+.modal-title { font-size: 16px; font-weight: 600; color: var(--text); }
+.modal-close {width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: all 0.2s;}
+.modal-close:hover { background: rgba(255,255,255,0.1); color: #fff; transform: rotate(90deg); }
+.modal-body { padding: 24px; overflow-y: auto; flex: 1; }
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Under the hood (Simplified) */
+.uth-hero { margin-bottom: 32px; text-align: center; }
+.uth-hero h3 { font-size: 24px; margin-bottom: 12px; color: var(--text); }
+.uth-hero p { font-size: 15px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+.uth-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.uth-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-soft); border-radius: 16px; padding: 24px; transition: border-color 0.3s ease, transform 0.3s ease; }
+.uth-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 12px 24px -12px var(--accent-glow); }
+.uth-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(139,92,246,0.1); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
+.uth-card h4 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+.uth-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
+/* Telegram Bot Specifics */
+.chat-window {background: #17212b; border-radius: 12px; overflow: hidden; height: 550px; display: flex; flex-direction: column;}
+.chat-header {background: #242f3d; padding: 12px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0;}
+.chat-avatar {width: 40px; height: 40px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 18px;}
+.chat-info h4 {font-size: 15px; margin-bottom: 2px; color: #fff; margin: 0;}
+.chat-info span {font-size: 12px; color: #7f91a4;}
+.chat-messages {flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; scroll-behavior: smooth;}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: #2b5278; border-radius: 2px; }
+.chat-bubble {max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 14.5px; line-height: 1.45; animation: bubbleIn 0.3s ease-out;}
+@keyframes bubbleIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.chat-bubble.bot { background: #182533; color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; }
+.chat-bubble.user { background: #2b5278; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.chat-keyboard { display: flex; flex-direction: column; gap: 6px; margin-top: 10px;}
+.chat-btn {background: transparent; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 8px; color: #fff; font-size: 14px; cursor: pointer; transition: background 0.2s; text-align: center; font-weight: 500;}
+.chat-btn:hover { background: rgba(255,255,255,0.1); }
+.chat-typing {display: none; align-self: flex-start; background: #182533; padding: 12px 16px; border-radius: 12px; border-bottom-left-radius: 4px; gap: 4px; align-items: center;}
+.chat-typing.visible { display: flex; }
+.typing-dot {width: 6px; height: 6px; background: #7f91a4; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both;}
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+@keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+/* Поле ввода */
+.chat-input-area {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; background: #242f3d; border-top: 1px solid rgba(255,255,255,0.05);
+}
+.chat-input {
+  flex: 1; background: transparent; border: none; color: #fff;
+  font-size: 15px; outline: none; font-family: inherit;
+}
+.chat-input::placeholder { color: #7f91a4; }
+.chat-send-btn {
+  background: transparent; border: none; color: #5eb5f7;
+  cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center;
+  transition: color 0.2s;
+}
+.chat-send-btn:hover { color: #8ccbf9; }
+
+/* Coffee Landing Specifics */
+.coffee-landing {background: #fcf9f2; color: #2d2824; font-family: "Georgia", serif; padding-bottom: 40px;}
+.coffee-nav {padding: 20px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e6dfd3;}
+.coffee-logo {font-size: 22px; font-weight: bold; letter-spacing: 1px; color: #4a3b32;}
+.coffee-links {display: flex; gap: 20px; font-size: 14px; font-family: sans-serif; color: #7a6b61;}
+.coffee-links a {color: #7a6b61; text-decoration: none; transition: color 0.2s;}
+.coffee-links a:hover {color: #4a3b32;}
+.coffee-hero {padding: 60px 32px; text-align: center; background-image: radial-gradient(#eaddcd 1px, transparent 1px); background-size: 20px 20px;}
+.coffee-hero h2 {font-size: 38px; margin-bottom: 16px; color: #2d2824; font-weight: normal; line-height: 1.2;}
+.coffee-hero p {font-family: sans-serif; color: #7a6b61; margin-bottom: 32px; font-size: 16px;}
+.coffee-btn {display: inline-block; background: #4a3b32; color: #fff; padding: 12px 30px; border-radius: 4px; text-decoration: none; font-family: sans-serif; font-weight: 500; font-size: 15px; transition: background 0.2s;}
+.coffee-btn:hover {background: #2d2824; color: #fff;}
+.coffee-menu {padding: 20px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 40px;}
+.coffee-item {display: flex; justify-content: space-between; border-bottom: 1px solid #e6dfd3; padding-bottom: 12px; font-family: sans-serif; align-items: flex-end;}
+.coffee-item-info {max-width: 70%;}
+.coffee-item h4 {font-family: "Georgia", serif; font-size: 18px; color: #4a3b32; margin: 0 0 4px 0; font-weight: bold;}
+.coffee-item p {color: #7a6b61; font-size: 13px; margin: 0; line-height: 1.3;}
+.coffee-price {font-weight: 600; color: #4a3b32; font-size: 16px; white-space: nowrap;}
+
+/* ---------- Breakpoints ---------- */
+@media (min-width:480px){
+  .hero-actions{flex-wrap:nowrap}
+  .def-grid{grid-template-columns:1fr 1fr}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .contacts-grid{grid-template-columns:1fr 1fr}
+  .uth-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width:768px){
+  .section{padding:100px 0}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1.4fr 1fr 1fr}
+  .channel-box{padding:72px 48px}
+  .coffee-menu {gap: 30px 60px;}
+  .uth-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width:1024px){
+  .section{padding:110px 0}.burger{display:none}
+  .site-nav,.site-nav.is-open{position:static;display:flex;align-items:center;gap:6px;background:transparent;border:0;box-shadow:none;padding:0;width:auto;animation:none;}
+  .site-nav ul{flex-direction:row;gap:2px;margin:0 16px 0 0}
+  .site-nav .nav-link{padding:10px 16px;font-size:15px}
+  .nav-phone{width:auto;padding:11px 22px;font-size:14px}
+  .hero-grid{grid-template-columns:1.05fr .95fr;gap:72px}.hero-visual{min-height:560px}
+  .def-grid{grid-template-columns:repeat(3,1fr)}.portfolio-grid{grid-template-columns:repeat(3,1fr)}
+  .steps-grid{grid-template-columns:repeat(3,1fr)}.contacts-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1280px){.hero{padding:64px 0 100px}.hero-grid{gap:88px}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.001ms !important;animation-duration:.001ms !important;animation-iteration-count:1 !important;}
+  .reveal{opacity:1;transform:none}.aurora-blob{animation:none}.btn::before{display:none}.hero h1 em{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<!-- Aurora Background -->
+<div class="aurora-bg" aria-hidden="true">
+  <div class="aurora-blob blob-1"></div>
+  <div class="aurora-blob blob-2"></div>
+  <div class="aurora-blob blob-3"></div>
+  <div class="aurora-blob blob-4"></div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#top" aria-label="Fill — на главную">
+      <svg class="logo-mark" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"></path>
+      </svg>
+      <span><b>f1ll</b></span>
+    </a>
+
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="primary-nav" aria-label="Основная навигация">
+      <ul>
+        <li><a class="nav-link" href="#what">Подход</a></li>
+        <li><a class="nav-link" href="#portfolio">Проекты</a></li>
+        <li><a class="nav-link" href="#tools">Стек</a></li>
+        <li><a class="nav-link" href="#process">Процесс</a></li>
+        <li><a class="nav-link" href="#faq">Вопросы</a></li>
+        <li><a class="nav-link" href="#contacts">Контакты</a></li>
+      </ul>
+      <a class="btn btn-accent nav-phone" href="https://t.me/vibecodingbyf1ll" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M22 3 11 14"></path>
+          <path d="M22 3l-7 18-4-7-7-4z"></path>
+        </svg>
+        Мой канал
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text reveal">
+        <div class="hero-badge">
+          <span class="dot" aria-hidden="true"></span>
+          Digital Creator • 2026
+        </div>
+        <h1>Привет, я Fill. <br><em>Создаю цифровые продукты</em> нового поколения</h1>
+        <p class="lead">Занимаюсь разработкой во всех направлениях: от сайтов и интерфейсов до полноценных программ и Telegram-ботов. Использую современные подходы, чтобы быстро воплощать идеи в жизнь.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-accent" href="https://t.me/vibecodingbyf1ll" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M22 3 11 14"></path>
+              <path d="M22 3l-7 18-4-7-7-4z"></path>
+            </svg>
+            Читать канал
+          </a>
+          <a class="btn btn-primary" href="#portfolio">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+            </svg>
+            Смотреть работы
+          </a>
+        </div>
+
+        <a href="#contacts" class="hero-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Связаться со мной
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="margin-left:auto"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+
+        <ul class="trust-list">
+          <li class="trust-item">
+            <div class="trust-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+            </div>
+            <div class="trust-content">
+              <strong>Полный цикл</strong>
+              <span>Могу собрать проект с нуля: от продумывания логики до финального кода.</span>
+            </div>
+          </li>
+          <li class="trust-item">
+            <div class="trust-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+            </div>
+            <div class="trust-content">
+              <strong>Честный результат</strong>
+              <span>Делюсь реальными кейсами, показываю процесс и открыто рассказываю о сложностях.</span>
+            </div>
+          </li>
+          <li class="trust-item">
+            <div class="trust-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div class="trust-content">
+              <strong>Всё в Telegram</strong>
+              <span>Главные новости, анонсы проектов и полезные находки публикую в своем канале.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal">
+        <svg class="hero-svg-bg" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Абстрактная иллюстрация: неоновые фигуры и код">
+          <defs>
+            <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1e1b4b"></stop>
+              <stop offset="1" stop-color="#08080d"></stop>
+            </linearGradient>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="20" result="blur"></feGaussianBlur>
+              <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+            </filter>
+            <filter id="softGlow">
+              <feGaussianBlur stdDeviation="8" result="blur"></feGaussianBlur>
+              <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+            </filter>
+          </defs>
+
+          <rect width="600" height="700" fill="url(#bgGrad)"></rect>
+          
+          <circle cx="150" cy="200" r="180" fill="#ec4899" opacity="0.15" filter="url(#glow)"></circle>
+          <circle cx="450" cy="400" r="220" fill="#3b82f6" opacity="0.15" filter="url(#glow)"></circle>
+          <circle cx="300" cy="600" r="150" fill="#8b5cf6" opacity="0.2" filter="url(#glow)"></circle>
+
+          <g stroke="#ffffff" stroke-width="1" opacity="0.03">
+            <line x1="100" y1="0" x2="100" y2="700"></line>
+            <line x1="200" y1="0" x2="200" y2="700"></line>
+            <line x1="300" y1="0" x2="300" y2="700"></line>
+            <line x1="400" y1="0" x2="400" y2="700"></line>
+            <line x1="500" y1="0" x2="500" y2="700"></line>
+            <line x1="0" y1="100" x2="600" y2="100"></line>
+            <line x1="0" y1="200" x2="600" y2="200"></line>
+            <line x1="0" y1="300" x2="600" y2="300"></line>
+            <line x1="0" y1="400" x2="600" y2="400"></line>
+            <line x1="0" y1="500" x2="600" y2="500"></line>
+            <line x1="0" y1="600" x2="600" y2="600"></line>
+          </g>
+
+          <g transform="translate(420 220) rotate(10)">
+            <rect width="140" height="180" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1.5"></rect>
+            <rect x="20" y="20" width="80" height="8" rx="4" fill="#8b5cf6" opacity="0.8"></rect>
+            <rect x="20" y="40" width="100" height="6" rx="3" fill="#3f3f46"></rect>
+            <rect x="20" y="54" width="90" height="6" rx="3" fill="#3f3f46"></rect>
+            <rect x="20" y="80" width="100" height="60" rx="8" fill="#08080d"></rect>
+            <path d="M30 130 L50 110 L70 120 L90 90 L110 100" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="110" cy="100" r="3" fill="#3b82f6" filter="url(#softGlow)"></circle>
+          </g>
+
+          <g transform="translate(100 300) rotate(-5)">
+            <rect width="120" height="150" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1.5"></rect>
+            <rect x="15" y="15" width="60" height="8" rx="4" fill="#ec4899" opacity="0.8"></rect>
+            <rect x="15" y="35" width="90" height="6" rx="3" fill="#3f3f46"></rect>
+            <rect x="15" y="49" width="80" height="6" rx="3" fill="#3f3f46"></rect>
+            <circle cx="60" cy="100" r="25" fill="none" stroke="#3f3f46" stroke-width="6"></circle>
+            <circle cx="60" cy="100" r="25" fill="none" stroke="#8b5cf6" stroke-width="6" stroke-dasharray="100 50" stroke-linecap="round" transform="rotate(-90 60 100)"></circle>
+          </g>
+
+          <g transform="translate(300 400)">
+            <path d="M-70 80 C-70 0, -35 -50, 0 -50 C35 -50, 70 0, 70 80 Z" fill="#18181b" stroke="#27272a" stroke-width="2"></path>
+            <circle cx="0" cy="-80" r="42" fill="#18181b" stroke="#27272a" stroke-width="2"></circle>
+            <path d="M-25 -100 Q0 -115 25 -100" fill="none" stroke="#3f3f46" stroke-width="4"></path>
+            <rect x="-30" y="-85" width="22" height="12" rx="4" fill="none" stroke="#8b5cf6" stroke-width="2"></rect>
+            <rect x="8" y="-85" width="22" height="12" rx="4" fill="none" stroke="#8b5cf6" stroke-width="2"></rect>
+            <line x1="-8" y1="-79" x2="8" y2="-79" stroke="#8b5cf6" stroke-width="2"></line>
+          </g>
+        </svg>
+
+        <div class="hero-visual-overlay">
+          <div class="floating-tags">
+            <div class="f-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+              Идея → продукт
+            </div>
+            <div class="f-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+              Прозрачность
+            </div>
+          </div>
+          <div class="visual-text">
+            <b>Хороший продукт — это не просто код.</b> Это удобство, скорость и внимание к деталям. Я делаю так, чтобы всё работало идеально.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="section-divider"></div></div>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="what" aria-labelledby="what-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Мой подход</p>
+      <h2 id="what-title">Три главных принципа</h2>
+      <p>Я не просто собираю шаблоны. В каждом проекте важен смысл, удобство и качественная реализация.</p>
+    </div>
+
+    <div class="def-grid reveal">
+      <div class="def-card glass-card">
+        <span class="big-num" aria-hidden="true">01</span>
+        <h3>Смысл и идея</h3>
+        <p>Любой проект начинается с понимания задачи. Что нужно пользователю? Какую проблему мы решаем? Без этого не будет хорошего результата.</p>
+      </div>
+      <div class="def-card glass-card">
+        <span class="big-num" aria-hidden="true">02</span>
+        <h3>Дизайн и опыт</h3>
+        <p>Продумываю интерфейс так, чтобы им было удобно пользоваться с любого устройства. Визуал имеет значение, но функциональность всегда на первом месте.</p>
+      </div>
+      <div class="def-card glass-card">
+        <span class="big-num" aria-hidden="true">03</span>
+        <h3>Разработка и тесты</h3>
+        <p>Собираю проект, проверяю работу всех элементов, оптимизирую код для быстрой загрузки. Главное — чтобы всё летало и не ломалось.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="section-divider"></div></div>
+
+<!-- ============ PORTFOLIO ============ -->
+<section class="section" id="portfolio" aria-labelledby="portfolio-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Портфолио</p>
+      <h2 id="portfolio-title">Избранные проекты</h2>
+      <p>Здесь собраны мои работы, которые показывают мой текущий уровень и прогресс. Каждый проект — это новый опыт и шаг вперед.</p>
+    </div>
+
+    <div class="portfolio-grid reveal">
+      <!-- Проект 1 -->
+      <article class="project-card glass-card">
+        <div class="project-visual">
+          <div class="preview-mac">
+            <div class="preview-mac-header">
+              <div class="preview-mac-dot"></div>
+              <div class="preview-mac-dot"></div>
+              <div class="preview-mac-dot"></div>
+            </div>
+            <div class="preview-mac-body"></div>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3>Этот сайт</h3>
+          <p>Тот самый сайт, который ты сейчас читаешь. Собран с нуля: от структуры и дизайна до анимаций. Мой первый боевой опыт.</p>
+          <div class="project-meta">
+            <span class="pill pill--accent">HTML/CSS/JS</span>
+            <span class="pill">Cursor</span>
+          </div>
+          <div class="project-footer">
+            <span class="project-status">Готово</span>
+            <button class="project-link" data-modal="modal-under-the-hood" aria-label="Узнать, как создавался этот сайт">
+              Под капотом
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Проект 2 -->
+      <article class="project-card glass-card">
+        <div class="project-visual">
+          <div class="preview-chat">
+            <div class="preview-chat-bubble"></div>
+            <div class="preview-chat-bubble user"></div>
+            <div class="preview-chat-bubble" style="width: 50%;"></div>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3>Telegram-бот для привычек</h3>
+          <p>Учебный бот для трекинга привычек. Позволяет добавлять цели и следить за прогрессом. Учусь работать с API и логикой диалога.</p>
+          <div class="project-meta">
+            <span class="pill pill--accent">Python</span>
+            <span class="pill">Claude</span>
+          </div>
+          <div class="project-footer">
+            <span class="project-status">Интерактив</span>
+            <button class="project-link" data-modal="modal-bot" aria-label="Посмотреть бота">
+              Попробовать
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Проект 3 -->
+      <article class="project-card glass-card">
+        <div class="project-visual" style="background: #fcf9f2; border-bottom: none;">
+          <div class="preview-coffee">
+            <div class="preview-coffee-title">BREW & CO.</div>
+            <div class="preview-coffee-line"></div>
+          </div>
+        </div>
+        <div class="project-body">
+          <h3>Мини-лендинг для бренда</h3>
+          <p>Концепт одностраничника для небольшой кофейни. Попробовал сделать акцентный дизайн с уникальной типографикой и атмосферой.</p>
+          <div class="project-meta">
+            <span class="pill pill--accent">Landing</span>
+            <span class="pill">Lovable</span>
+          </div>
+          <div class="project-footer">
+            <span class="project-status">Готово</span>
+            <button class="project-link" data-modal="modal-landing" aria-label="Посмотреть лендинг">
+              Смотреть
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="section-divider"></div></div>
+
+<!-- ============ TOOLS ============ -->
+<section class="section" id="tools" aria-labelledby="tools-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Инструменты</p>
+      <h2 id="tools-title">Мой рабочий стек</h2>
+      <p>Инструменты, с которыми я работаю каждый день. Постоянно изучаю новое и расширяю свой набор.</p>
+    </div>
+    
+    <div class="tools-grid reveal">
+      <span class="tool-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>Cursor</span>
+      <span class="tool-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Claude</span>
+      <span class="tool-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>ChatGPT</span>
+      <span class="tool-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="M9 9h6v6H9z"></path></svg>Replit</span>
+      <span class="tool-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>Lovable</span>
+      <span class="tool-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>GitHub Copilot</span>
+      <span class="tool-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>Vercel</span>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="section-divider"></div></div>
+
+<!-- ============ PROCESS ============ -->
+<section class="section" id="process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Процесс</p>
+      <h2 id="process-title">Как я работаю</h2>
+      <p>Пять этапов от появления идеи до готового результата. Каждый шаг важен для итогового качества.</p>
+    </div>
+
+    <div class="steps-grid reveal">
+      <div class="step-card glass-card">
+        <div class="step-num" aria-hidden="true">1</div>
+        <h3>Идея</h3>
+        <p>Определяю задачу и цель проекта. Что именно мы хотим получить и для кого это делается.</p>
+      </div>
+      <div class="step-card glass-card">
+        <div class="step-num" aria-hidden="true">2</div>
+        <h3>Прототип</h3>
+        <p>Продумываю структуру и создаю макет. Важно понять, как будет выглядеть интерфейс до написания кода.</p>
+      </div>
+      <div class="step-card glass-card">
+        <div class="step-num" aria-hidden="true">3</div>
+        <h3>Разработка</h3>
+        <p>Пишу код, настраиваю логику, базы данных и анимации. Проект начинает обретать форму и функциональность.</p>
+      </div>
+      <div class="step-card glass-card">
+        <div class="step-num" aria-hidden="true">4</div>
+        <h3>Тесты</h3>
+        <p>Проверяю работу на разных устройствах. Ищу баги и исправляю недочеты для идеального результата.</p>
+      </div>
+      <div class="step-card glass-card">
+        <div class="step-num" aria-hidden="true">5</div>
+        <h3>Запуск</h3>
+        <p>Публикую проект, собираю обратную связь и планирую дальнейшие улучшения.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="section-divider"></div></div>
+
+<!-- ============ CHANNEL CTA ============ -->
+<section class="section">
+  <div class="container">
+    <div class="channel-box reveal">
+      <h2>Следи за моим прогрессом</h2>
+      <p>В моём Telegram-канале я делюсь новыми проектами, находками в мире разработки и полезными инструментами. Подписывайся, чтобы быть в курсе.</p>
+      <div class="channel-actions">
+        <a class="btn btn-accent" href="https://t.me/vibecodingbyf1ll" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3 11 14"></path><path d="M22 3l-7 18-4-7-7-4z"></path></svg>
+          Подписаться
+        </a>
+        <a class="btn btn-ghost" href="https://t.me/f1llkisazaykin" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Написать лично
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="section-divider"></div></div>
+
+<!-- ============ FAQ ============ -->
+<section class="section section--soft" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Вопросы</p>
+      <h2 id="faq-title">Частые вопросы</h2>
+      <p>Собрал здесь то, что спрашивают чаще всего.</p>
+    </div>
+
+    <div class="faq reveal">
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-q-1">
+            <span>Чем ты сейчас занимаешься?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-1" role="region" aria-labelledby="faq-q-1" hidden>
+          <p>Изучаю современные подходы к веб-разработке, создаю цифровые продукты для портфолио и постоянно практикуюсь. В планах — коммерческие заказы на разработку сайтов, ботов и интерфейсов.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-q-2">
+            <span>Какие инструменты используешь?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-2" role="region" aria-labelledby="faq-q-2" hidden>
+          <p>Мой основной стек — HTML, CSS, JavaScript и Python. Для ускорения процессов использую современные среды разработки вроде Cursor. Полный список можно увидеть в разделе "Стек".</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-q-3">
+            <span>Можно ли заказать у тебя проект?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-3" role="region" aria-labelledby="faq-q-3" hidden>
+          <p>Да, я открыт к интересным предложениям. Если у вас есть идея, которая поможет мне прокачаться как специалисту, напишите мне в Telegram. Обсудим детали, сроки и формат работы.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-q-4">
+            <span>Где можно посмотреть больше работ?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-4" role="region" aria-labelledby="faq-q-4" hidden>
+          <p>Основной процесс разработки и новые кейсы я публикую в своём Telegram-канале <a href="https://t.me/vibecodingbyf1ll" target="_blank" rel="noopener" style="color:var(--accent-hover);text-decoration:underline;text-underline-offset:2px">vibecoding by f1ll</a>. Там же можно найти ссылки на мои GitHub репозитории.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-q-5">
+            <span>Нужно ли мне разбираться в коде?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-5" role="region" aria-labelledby="faq-q-5" hidden>
+          <p>Вовсе нет. Для заказчика главное — четко описать задачу и бизнес-логику. Всю техническую часть, написание кода и настройку я беру на себя. Вам не нужно быть программистом.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-q-6">
+            <span>Как проходит процесс работы?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-6" role="region" aria-labelledby="faq-q-6" hidden>
+          <p>Сначала мы обсуждаем задачу и фиксируем требования. Затем я создаю прототип, пишу код и тестирую результат. Вы видите промежуточные этапы и вносите правки на каждом шаге.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-7" id="faq-q-7">
+            <span>Работаешь ли ты с мелкими задачами?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-7" role="region" aria-labelledby="faq-q-7" hidden>
+          <p>Да, я беру как крупные проекты (сайты под ключ), так и точечные задачи. Например, сверстать секцию, добавить интерактивную анимацию или интегрировать нужный скрипт.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <h3 class="faq-h">
+          <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-8" id="faq-q-8">
+            <span>Как с тобой связаться?</span>
+            <span class="faq-chev" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-8" role="region" aria-labelledby="faq-q-8" hidden>
+          <p>Самый быстрый способ — написать в Telegram (в личные сообщения или в канал). Также можно связаться через ВКонтакте или отправить письмо на почту. Все ссылки есть в блоке "Контакты".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="section-divider"></div></div>
+
+<!-- ============ CONTACTS ============ -->
+<section class="section" id="contacts" aria-labelledby="contacts-title">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Контакты</p>
+      <h2 id="contacts-title">Связаться со мной</h2>
+      <p>Если есть вопросы, идеи или предложения о сотрудничестве — я всегда на связи.</p>
+    </div>
+
+    <div class="contacts-grid reveal">
+      <a href="https://t.me/vibecodingbyf1ll" target="_blank" rel="noopener" class="contact-card glass-card">
+        <div class="c-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3 11 14"></path><path d="M22 3l-7 18-4-7-7-4z"></path></svg>
+        </div>
+        <div class="c-text">
+          <small>Telegram-канал</small>
+          <strong>vibecoding by f1ll</strong>
+        </div>
+      </a>
+      <a href="https://t.me/f1llkisazaykin" target="_blank" rel="noopener" class="contact-card glass-card">
+        <div class="c-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <div class="c-text">
+          <small>Telegram</small>
+          <strong>Написать лично</strong>
+        </div>
+      </a>
+      <a href="https://vk.ru/lovessc3zy" target="_blank" rel="noopener" class="contact-card glass-card">
+        <div class="c-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974H1.598c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.575 2.389 7.119 2.389z"></path></svg>
+        </div>
+        <div class="c-text">
+          <small>ВКонтакте</small>
+          <strong>Написать во ВКонтакте</strong>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-note reveal" style="margin-top:24px;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);backdrop-filter:blur(16px);font-size:14.5px;color:var(--text-muted);line-height:1.65">
+      <h3 style="font-size:16px;color:var(--text);margin-bottom:8px">Почта</h3>
+      <p>Для деловых предложений: <a href="mailto:phurdys.08@gmail.com" style="color:var(--accent-hover);text-decoration:underline;text-underline-offset:2px">phurdys.08@gmail.com</a>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-col">
+        <h3>Fill</h3>
+        <p class="requisites">
+          Разработчик.<br>
+          Создаю сайты, программы и ботов.<br>
+          Открыт к новым проектам.
+        </p>
+      </div>
+      <div class="f-col">
+        <h3>Навигация</h3>
+        <ul>
+          <li><a href="#what">Подход</a></li>
+          <li><a href="#portfolio">Проекты</a></li>
+          <li><a href="#tools">Стек</a></li>
+          <li><a href="#process">Процесс</a></li>
+          <li><a href="#faq">Вопросы</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h3>Ссылки</h3>
+        <ul>
+          <li><a href="https://t.me/vibecodingbyf1ll" target="_blank" rel="noopener">Telegram-канал</a></li>
+          <li><a href="https://t.me/f1llkisazaykin" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://vk.ru/lovessc3zy" target="_blank" rel="noopener">ВКонтакте</a></li>
+          <li><a href="mailto:phurdys.08@gmail.com">Почта</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Fill. Все права защищены.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODALS ============ -->
+
+<!-- Модалка 1: Под капотом -->
+<div class="modal" id="modal-under-the-hood" aria-hidden="true" role="dialog" aria-labelledby="modal-uth-title">
+  <div class="modal-overlay" data-close-modal></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-uth-title">Как создавался этот сайт</div>
+      <button class="modal-close" data-close-modal aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="uth-hero">
+        <h3>Задумка, магия и результат</h3>
+        <p>Коротко о том, как я собирал этот проект и какие инструменты использовал.</p>
+      </div>
+
+      <div class="uth-grid">
+        <div class="uth-card">
+          <div class="uth-icon">✨</div>
+          <h4>Задумка</h4>
+          <p>Создать минималистичный интерфейс с эффектом матового стекла и плавными анимациями.</p>
+        </div>
+        <div class="uth-card">
+          <div class="uth-icon">🛠️</div>
+          <h4>Инструменты</h4>
+          <p>Использовал HTML, CSS, JS и современные среды разработки для быстрого прототипирования.</p>
+        </div>
+        <div class="uth-card">
+          <div class="uth-icon">🚀</div>
+          <h4>Результат</h4>
+          <p>Адаптивный сайт с высокой скоростью загрузки, удобной навигацией и интерактивными элементами.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка 2: Telegram Бот -->
+<div class="modal" id="modal-bot" aria-hidden="true" role="dialog" aria-labelledby="modal-bot-title">
+  <div class="modal-overlay" data-close-modal></div>
+  <div class="modal-content" style="max-width: 900px;">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-bot-title">Интерактивный бот</div>
+      <button class="modal-close" data-close-modal aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="padding: 16px;">
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="chat-avatar">H</div>
+          <div class="chat-info">
+            <h4>Habit Tracker Bot</h4>
+            <span>бот</span>
+          </div>
+        </div>
+        <div class="chat-messages" id="chat-container">
+          <div class="chat-bubble bot">
+            Привет, Fill! 👋 Я твой трекер привычек. Что хочешь сделать?
+            <div class="chat-keyboard">
+              <button class="chat-btn" onclick="botReply('add')">➕ Добавить привычку</button>
+              <button class="chat-btn" onclick="botReply('stats')">📊 Моя статистика</button>
+            </div>
+          </div>
+          <div class="chat-typing" id="typing-indicator">
+            <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chat-input" placeholder="Написать сообщение..." autocomplete="off">
+          <button class="chat-send-btn" id="chat-send-btn" aria-label="Отправить сообщение">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Модалка 3: Кофейный лендинг -->
+<div class="modal" id="modal-landing" aria-hidden="true" role="dialog" aria-labelledby="modal-landing-title">
+  <div class="modal-overlay" data-close-modal></div>
+  <div class="modal-content" style="max-width: 900px; padding: 0;">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-landing-title">Мини-лендинг для бренда</div>
+      <button class="modal-close" data-close-modal aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    
+    <div class="modal-body" style="padding: 0;">
+      <div class="coffee-landing">
+        <div class="coffee-nav">
+          <div class="coffee-logo">BREW & CO.</div>
+          <div class="coffee-links">
+            <a href="#" onclick="return false">Меню</a>
+            <a href="#" onclick="return false">О нас</a>
+            <a href="#" onclick="return false">Контакты</a>
+          </div>
+        </div>
+        <div class="coffee-hero">
+          <h2>Идеальный кофе<br>в самом центре города</h2>
+          <p>Обжарка собственного производства, свежая выпечка и уютная атмосфера.</p>
+          <a href="#" class="coffee-btn" onclick="return false">Заказать столик</a>
+        </div>
+        <div class="coffee-menu">
+          <div class="coffee-item">
+            <div class="coffee-item-info">
+              <h4>Капучино</h4>
+              <p>Классика с плотной молочной пенкой</p>
+            </div>
+            <div class="coffee-price">220 ₽</div>
+          </div>
+          <div class="coffee-item">
+            <div class="coffee-item-info">
+              <h4>Флэт Уайт</h4>
+              <p>Двойной эспрессо и горячее молоко</p>
+            </div>
+            <div class="coffee-price">250 ₽</div>
+          </div>
+          <div class="coffee-item">
+            <div class="coffee-item-info">
+              <h4>Круассан</h4>
+              <p>С маслом и миндалем</p>
+            </div>
+            <div class="coffee-price">180 ₽</div>
+          </div>
+          <div class="coffee-item">
+            <div class="coffee-item-info">
+              <h4>Матча Латте</h4>
+              <p>С японским чаем и ванилью</p>
+            </div>
+            <div class="coffee-price">260 ₽</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* --- Mobile Menu --- */
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('primary-nav');
+  
+  if (burger && nav) {
+    const toggleMenu = () => {
+      const isOpen = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', !isOpen);
+      nav.classList.toggle('is-open');
+      document.body.classList.toggle('menu-locked', !isOpen);
+      
+      if (!isOpen) {
+        const firstLink = nav.querySelector('.nav-link');
+        if(firstLink) firstLink.focus();
+      }
+    };
+
+    burger.addEventListener('click', toggleMenu);
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        toggleMenu();
+        burger.focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (nav.classList.contains('is-open') && !nav.contains(e.target) && !burger.contains(e.target)) {
+        toggleMenu();
+      }
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('is-open')) {
+          toggleMenu();
+        }
+      });
+    });
+  }
+
+  /* --- Header scroll state --- */
+  const header = document.querySelector('.site-header');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive: true});
+
+  /* --- Smooth scroll --- */
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        if (prefersReducedMotion) {
+          target.scrollIntoView();
+        } else {
+          target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+        target.setAttribute('tabindex', '-1');
+        target.focus({preventScroll: true});
+        target.addEventListener('blur', () => target.removeAttribute('tabindex'), {once: true});
+      }
+    });
+  });
+
+  /* --- FAQ Accordion --- */
+  const faqButtons = document.querySelectorAll('.faq-q');
+  
+  faqButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const answerId = button.getAttribute('aria-controls');
+      const answer = document.getElementById(answerId);
+      
+      faqButtons.forEach(otherBtn => {
+        if (otherBtn !== button) {
+          otherBtn.setAttribute('aria-expanded', 'false');
+          otherBtn.closest('.faq-item').classList.remove('is-open');
+          const otherAnswerId = otherBtn.getAttribute('aria-controls');
+          const otherAnswer = document.getElementById(otherAnswerId);
+          if (otherAnswer) otherAnswer.hidden = true;
+        }
+      });
+      
+      button.setAttribute('aria-expanded', !isExpanded);
+      item.classList.toggle('is-open', !isExpanded);
+      if (answer) answer.hidden = isExpanded;
+    });
+  });
+
+  /* --- Scroll Reveal --- */
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+    
+    reveals.forEach(el => revealObserver.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  /* --- MODAL LOGIC --- */
+  const modalTriggers = document.querySelectorAll('[data-modal]');
+  const modals = document.querySelectorAll('.modal');
+  let activeModal = null;
+
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    
+    activeModal = modal;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-locked');
+    
+    const closeBtn = modal.querySelector('.modal-close');
+    if (closeBtn) setTimeout(() => closeBtn.focus(), 100);
+    
+    if (modalId === 'modal-bot') {
+      const chatInput = document.getElementById('chat-input');
+      if (chatInput) setTimeout(() => chatInput.focus(), 100);
+    }
+  }
+
+  function closeModal() {
+    if (!activeModal) return;
+    
+    activeModal.classList.remove('active');
+    activeModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-locked');
+    activeModal = null;
+    
+    if (document.getElementById('chat-container')) {
+      resetBotDemo();
+    }
+  }
+
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modalId = trigger.getAttribute('data-modal');
+      openModal(modalId);
+    });
+  });
+
+  modals.forEach(modal => {
+    const closeElements = modal.querySelectorAll('[data-close-modal]');
+    closeElements.forEach(el => {
+      el.addEventListener('click', closeModal);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && activeModal) {
+      closeModal();
+    }
+  });
+
+  /* --- TELEGRAM BOT DEMO LOGIC --- */
+  let isBotTyping = false;
+  let awaitingHabitName = false;
+  let userHabits = [];
+
+  window.botReply = function(action) {
+    if (isBotTyping) return;
+    
+    const chatContainer = document.getElementById('chat-container');
+    const typingIndicator = document.getElementById('typing-indicator');
+    if (!chatContainer || !typingIndicator) return;
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-bubble user';
+    userMsg.innerText = action === 'add' ? 'Добавить привычку' : 'Моя статистика';
+    
+    chatContainer.insertBefore(userMsg, typingIndicator);
+    
+    const oldKeyboards = chatContainer.querySelectorAll('.chat-keyboard');
+    oldKeyboards.forEach(kb => kb.remove());
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    isBotTyping = true;
+    typingIndicator.classList.add('visible');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    setTimeout(() => {
+      typingIndicator.classList.remove('visible');
+      isBotTyping = false;
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'chat-bubble bot';
+      
+      if (action === 'add') {
+        awaitingHabitName = true;
+        botMsg.innerHTML = 'Отлично! Напиши в поле ввода ниже, какую привычку хочешь отслеживать?';
+      } else {
+        awaitingHabitName = false;
+        
+        if (userHabits.length === 0) {
+          botMsg.innerHTML = 'У тебя пока нет добавленных привычек. Самое время добавить первую! 😉';
+        } else {
+          let habitsHtml = '📊 <b>Твои привычки:</b><br><br>';
+          userHabits.forEach(habit => {
+            habitsHtml += `✅ ${habit}<br>`;
+          });
+          botMsg.innerHTML = habitsHtml;
+        }
+        
+        const keyboard = document.createElement('div');
+        keyboard.className = 'chat-keyboard';
+        keyboard.innerHTML = `
+          <button class="chat-btn" onclick="botReply('add')">➕ Добавить привычку</button>
+          <button class="chat-btn" onclick="botReply('stats')">📊 Моя статистика</button>
+        `;
+        botMsg.appendChild(keyboard);
+      }
+
+      chatContainer.insertBefore(botMsg, typingIndicator);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+      
+      if (awaitingHabitName) {
+        const chatInput = document.getElementById('chat-input');
+        if (chatInput) chatInput.focus();
+      }
+    }, 1000);
+  };
+
+  window.sendUserMessage = function() {
+    if (isBotTyping) return;
+    
+    const chatInput = document.getElementById('chat-input');
+    const text = chatInput.value.trim();
+    if (!text) return;
+    
+    const chatContainer = document.getElementById('chat-container');
+    const typingIndicator = document.getElementById('typing-indicator');
+    if (!chatContainer || !typingIndicator) return;
+
+    chatInput.value = '';
+    
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-bubble user';
+    userMsg.innerText = text;
+    chatContainer.insertBefore(userMsg, typingIndicator);
+    
+    const oldKeyboards = chatContainer.querySelectorAll('.chat-keyboard');
+    oldKeyboards.forEach(kb => kb.remove());
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    isBotTyping = true;
+    typingIndicator.classList.add('visible');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    setTimeout(() => {
+      typingIndicator.classList.remove('visible');
+      isBotTyping = false;
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'chat-bubble bot';
+      
+      if (awaitingHabitName) {
+        userHabits.push(text);
+        botMsg.innerHTML = `Привычка «<b>${text}</b>» успешно добавлена! 🔥<br>Теперь она будет отображаться в твоей статистике.`;
+        awaitingHabitName = false;
+      } else {
+        botMsg.innerHTML = 'Я записал это. Используй кнопки ниже, чтобы посмотреть статистику или добавить новую привычку.';
+      }
+      
+      const keyboard = document.createElement('div');
+      keyboard.className = 'chat-keyboard';
+      keyboard.innerHTML = `
+        <button class="chat-btn" onclick="botReply('add')">➕ Добавить привычку</button>
+        <button class="chat-btn" onclick="botReply('stats')">📊 Моя статистика</button>
+      `;
+      botMsg.appendChild(keyboard);
+
+      chatContainer.insertBefore(botMsg, typingIndicator);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }, 1000);
+  };
+
+  const chatInput = document.getElementById('chat-input');
+  const chatSendBtn = document.getElementById('chat-send-btn');
+  
+  if (chatInput) {
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        window.sendUserMessage();
+      }
+    });
+  }
+  
+  if (chatSendBtn) {
+    chatSendBtn.addEventListener('click', window.sendUserMessage);
+  }
+
+  function resetBotDemo() {
+    const chatContainer = document.getElementById('chat-container');
+    const typingIndicator = document.getElementById('typing-indicator');
+    const chatInput = document.getElementById('chat-input');
+    
+    if (!chatContainer || !typingIndicator) return;
+    
+    const allBubbles = chatContainer.querySelectorAll('.chat-bubble');
+    allBubbles.forEach((bubble, index) => {
+      if (index > 0) bubble.remove();
+    });
+    
+    const firstBubble = allBubbles[0];
+    if (firstBubble && !firstBubble.querySelector('.chat-keyboard')) {
+      const keyboard = document.createElement('div');
+      keyboard.className = 'chat-keyboard';
+      keyboard.innerHTML = `
+        <button class="chat-btn" onclick="botReply('add')">➕ Добавить привычку</button>
+        <button class="chat-btn" onclick="botReply('stats')">📊 Моя статистика</button>
+      `;
+      firstBubble.appendChild(keyboard);
+    }
+    
+    typingIndicator.classList.remove('visible');
+    if (chatInput) chatInput.value = '';
+    isBotTyping = false;
+    awaitingHabitName = false;
+    userHabits = [];
+    chatContainer.scrollTop = 0;
+  }
+
+})();
+</script>
+</body>
+</html>
